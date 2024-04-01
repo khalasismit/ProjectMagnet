@@ -1,0 +1,33 @@
+.sidebarRowMini {
+    flex: 0.1;
+}
+
+.sidebarRowMini__row.Selected {
+    background: lightgray;
+    border-radius: 8px;
+    /* color: red; */
+}
+
+.sidebarRowMini__row {
+    display: flex;
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 10px;
+    padding: 16px 0px 14px;
+}
+
+.sidebarRowMini__row:hover {
+    background: lightgray;
+    border-radius: 8px;
+}
+
+.sidebarRowMini__title {
+    font-size: 12px;
+    font-weight: bold;
+}
+.sidebarRowMini__icon {
+    margin-bottom: 6px;
+}
