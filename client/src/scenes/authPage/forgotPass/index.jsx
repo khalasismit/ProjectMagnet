@@ -1,13 +1,15 @@
-import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
+import { Box, Button, CircularProgress, TextField, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ForgetPass = () => {
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const { palette } = useTheme();
     const [email, setEmail] = useState('');
     const [msg, setMsg] = useState("")
     const handleSendEmail = async () => {
+        setLoading(true)
         const sendEmailRes = await fetch(`http://localhost:3001/auth/forgot-password`, {
             method: "POST",
             headers: {
@@ -19,8 +21,11 @@ const ForgetPass = () => {
         })
         const res = await sendEmailRes.json()
         if (!res) {
+            setLoading(false)
             setMsg(sendEmailRes.message)
+
         } else {
+            setLoading(false)
             setMsg("Reset password link is sent to your email.")
             setTimeout(() => {
                 navigate("/home")
@@ -35,14 +40,31 @@ const ForgetPass = () => {
                     msg !== "" &&
                     <Typography sx={{ textAlign: "center", color: palette.primary.main, p: "1rem 0 0 0" }}>{msg}</Typography>
                 }
-                <Button fullWidth
-                    sx={{
-                        m: "1rem 0",
-                        p: "0.5rem",
-                        backgroundColor: palette.primary.dark,
-                        color: palette.background.alt,
-                        "&:hover": { color: palette.primary.dark, background: palette.primary.main },
-                    }} onClick={handleSendEmail} >Send Password Reset Link</Button>
+                {
+                    loading ?
+                        <Button
+                            fullWidth
+                            sx={{
+                                m: "1rem 0",
+                                p: "0.5rem",
+                                backgroundColor: palette.primary.dark,
+                                color: palette.background.alt,
+                                "&:hover": { color: palette.primary.dark, background: palette.primary.main },
+                            }}>
+                            <CircularProgress size={25}></CircularProgress>
+                        </Button>
+                        :
+                        <Button fullWidth
+                            sx={{
+                                m: "1rem 0",
+                                p: "0.5rem",
+                                backgroundColor: palette.primary.dark,
+                                color: palette.background.alt,
+                                "&:hover": { color: palette.primary.dark, background: palette.primary.main },
+                            }}
+                            onClick={handleSendEmail} >
+                            Send Password Reset Link</Button>
+                }
             </form>
         </div>
     );

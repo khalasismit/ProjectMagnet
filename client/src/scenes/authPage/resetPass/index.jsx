@@ -5,9 +5,9 @@ import {
     useMediaQuery,
     Typography,
     useTheme,
-    Checkbox,
-    FormControlLabel,
-    Divider,
+    // Checkbox,
+    // FormControlLabel,
+    // Divider,
     // Divider,
 } from "@mui/material";
 import { Formik } from "formik";
@@ -78,29 +78,10 @@ const ResetPass = () => {
     }
 
     useEffect(()=>{
-        console.log(token)
+        // console.log(token)
         setUser(jwtDecode(token));
-        console.log(jwtDecode(token))
+        // console.log(jwtDecode(token))
     },[])
-    // const handleSendEmail = async () => {
-    //     const sendEmailRes = await fetch(`http://localhost:3001/auth/forgot-pass`, {
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             email: pass
-    //         })
-    //     })
-    //     const res = await sendEmailRes.json()
-    //     if (!res) {
-    //         setMsg(sendEmailRes.message)
-    //     } else {
-    //         setMsg("Reset pass link is sent to your email.")
-    //     }
-    // }
-
-
 
     return (
         <Box>
